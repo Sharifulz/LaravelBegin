@@ -20,3 +20,9 @@ Route::get('/welcome', function () {
 Route::get('/hello/{name}', function ($name) {
     return "Oh, hellow there...".$name."";
 });
+
+Route::get('/posts/{name}', 'PostController@index');
+
+Route::resource('posts', 'PostController');
+
+Route::get('/contact','PostController@contact');
