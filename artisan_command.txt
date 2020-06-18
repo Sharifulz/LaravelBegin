@@ -1,0 +1,48 @@
+Create table on /database/migrations folder
+----------Command: php artisan make:migration create_table_persons --create=persons
+
+Create table to a specific folder
+Create a folder usually inside migrations. Named anything like --> table
+---------Command: php artisan make:migration create_table_product --path=/database/migrations/table
+
+Migrate all inside /database/migrations folder
+---------Command: php artisan migrate
+
+Migrate using specific path
+--------Command: php artisan migrate --path=/database/migrations/table
+
+Other Basic Commands:
+php artisan migrate:status
+php artisan migrate:reset
+php artisan migrate:rollback
+php artisan migrate:refresh
+
+Table Create Syntax
+   public function up()
+    {
+        Schema::create('persons', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->default("");
+            $table->string('email')->default("notgiven@na.com");
+            $table->integer('age')->default(0);
+            $table->timestamps();
+        });
+    }
+
+--------------------------------------------------------
+Add column to a table:
+--------Command: php artisan make:migration add_is_alive --table=persons
+
+Add column on newly created file:
+
+ public function up()
+    {
+        Schema::table('persons', function (Blueprint $table) {
+            //
+            $table->boolean('is_alive')->default(true);
+            $table->integer('salary')->default(0)->unsigned();
+        });
+    }
+
+Now migrate again :
+--------Command: php artisan migrate --path=/database/migrations/table
