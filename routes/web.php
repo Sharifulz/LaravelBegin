@@ -31,7 +31,8 @@ Route::get('/contact','PostController@contact');
 //----------Example: http://localhost:8000/insert/Shariful/shaarifulz@gmail.com
 Route::get('/insert/{name}/{email}', function ($name,$email){
     DB::insert('INSERT INTO persons(name,email) VALUES(?,?)',[$name,$email]);
-    return 'Welcome '.$name;
+    $result = Persons::all();
+    return $result;
 });
 
 //---------- GET value with raw query
@@ -60,9 +61,16 @@ Route::get('/all/persons', function (){
     return Persons::all();
 });
 //---------- GET data using Eloquent ORM
-//---------- Example: http://localhost:8000/all/persons
+//---------- Example: http://localhost:8000/find/person
 Route::get('/find/person', function (){
     $result = Persons::find(1);
     return $result->name;
+});
+
+//---------- GET data using Eloquent ORM
+//---------- Example: http://localhost:8000/find/person
+Route::get('/find/where', function (){
+    $result = Persons::where('id',2)->orderBy('id','desc')->take(1)->get();
+    return $result;
 });
 

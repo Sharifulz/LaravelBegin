@@ -18,7 +18,6 @@ class CreatePersonTable extends Migration
             $table->string('name')->default("");
             $table->string('email')->default("notgiven@na.com");
             $table->integer('age')->default(0);
-            $table->timestamps();
         });
     }
 
