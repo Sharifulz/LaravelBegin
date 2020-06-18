@@ -62,14 +62,18 @@ Route::get('/all/persons', function (){
 });
 //---------- GET data using Eloquent ORM
 //---------- Example: http://localhost:8000/find/person
-Route::get('/find/person', function (){
-    $result = Persons::find(1);
-    return $result->name;
+// /find/person not work
+//no word will be allow after find
+Route::get('/find', function (){
+//dd('Okkkkkkkkkkkk');
+    $result = Persons::findOrFail(1);
+    var_dump($result);
+    return $result;
 });
 
 //---------- GET data using Eloquent ORM
 //---------- Example: http://localhost:8000/find/person
-Route::get('/find/where', function (){
+Route::get('/findwhere', function (){
     $result = Persons::where('id',2)->orderBy('id','desc')->take(1)->get();
     return $result;
 });
